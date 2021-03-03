@@ -345,7 +345,7 @@ function new_piece(sp)
 
     if not current_piece:grid_empty(current_piece:get_coords()) then
         -- game over
-        love.load()
+        reset_game()
     end
 end
 
