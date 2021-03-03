@@ -180,7 +180,7 @@ function Piece:lock()
 
     if over_playfield == 4 then
         -- entire piece is above row 20
-        love.load()
+        reset_game()
     end
 
     -- TODO other spins
