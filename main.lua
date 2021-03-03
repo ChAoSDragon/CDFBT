@@ -146,11 +146,12 @@ function love.load()
     love.graphics.setBlendMode("alpha")
     for i,piece in pairs(shapes) do
         local p = create_piece(piece)
+        local w = p:get_width()
         p.x = draw_pos
         p.y = 0
         p:draw()
-        next_graphics[p.shape] = love.graphics.newQuad((p.x + 3) * 24, 0, 96, 48, next_piece_canvas)
-        draw_pos = draw_pos + 4
+        next_graphics[p.shape] = love.graphics.newQuad((p.x + 3) * 24, 0, 96, w * 24, next_piece_canvas)
+        draw_pos = draw_pos + w + 1
     end
     love.graphics.setCanvas()
     next_graphics.canvas = next_piece_canvas

@@ -19,6 +19,25 @@ function Piece:get_coords(offset)
     return p
 end
 
+function Piece:get_width()
+    -- the first rotation should be the widest
+    local coords = self.rotation_coords[1]
+    local width = 0
+    local x_pos = {0, 0} -- lowest, highest x
+
+    for i,v in ipairs(coords) do
+        if v[1] < x_pos[1] then
+            x_pos[1] = v[1]
+        end
+
+        if v[1] > x_pos[2] then
+            x_pos[2] = v[1]
+        end
+    end
+
+    return math.max((x_pos[2] - x_pos[1]) + 1, 1)
+end
+
 function Piece:move(direction)
     local old_pos = self:get_coords()
     local new_pos = self:get_coords(direction)
