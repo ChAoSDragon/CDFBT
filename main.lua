@@ -388,18 +388,18 @@ function draw_stat_panel()
     stat_panel_print("lines: "..lines_cleared)
     stat_panel_print("quads: "..quads_cleared)
     stat_panel_print(previous_clear)
-    -- TRT, BRN
-    local trt
+    -- QRT, BRN
+    local qrt
     local brn
     if lines_cleared > 0 then
-        trt = (quads_cleared * 4) / lines_cleared
+        qrt = (quads_cleared * 4) / lines_cleared
         brn = lines_cleared - (quads_cleared * 4)
-        trt = trt * 100
+        qrt = qrt * 100
     else
-        trt = 0
+        qrt = 0
         brn = 0
     end
-    stat_panel_print("TRT: "..string.format("%.2f", trt).."%")
+    stat_panel_print("QRT: "..string.format("%.2f", qrt).."%")
     stat_panel_print("BRN: "..brn)
     -- quad/i, spin/t
     local qpi
