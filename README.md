@@ -17,7 +17,7 @@ ChAoS_Dragon's Falling Block Trainer (CDFBT) is a falling block game.
 * level - the current level.
 * pps - pieces per second.
 * the row under this displays what type of line clear the previous placement was, if any.
-* TRT - Quad rate, of all the lines cleared, how many were part of a quad.
+* QRT - Quad rate, of all the lines cleared, how many were part of a quad.
 * BRN - Burn rate, of all the lines cleared, how many were not part of a quad.
 * Quad/I - Quads per I piece, of all the I pieces placed, how many were used to get a quad.
 * Spin/T - Spins per T piece, of all the T pieces placed, how many were used to get a T-Spin.
