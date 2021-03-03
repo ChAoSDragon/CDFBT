@@ -10,6 +10,18 @@ ChAoS_Dragon's Falling Block Trainer (CDFBT) is a falling block game.
 * Add new pieces by adding a file to the pieces directory.
 * Invisible mode.
 
+#### Stat panel
+* gravity(current/maximum) - current constantly increases - once it reaches the max, the piece drops one row, and the process repeats.
+* lock delay(current/maximum) - how long until piece locks automatically.
+* das/arr (currrent/maximum for both) - das is the delay from pressing a movement key to it repeating, arr is the rate at which it repeats.
+* level - the current level.
+* pps - pieces per second.
+* the row under this displays what type of line clear the previous placement was, if any.
+* TRT - Quad rate, of all the lines cleared, how many were part of a quad.
+* BRN - Burn rate, of all the lines cleared, how many were not part of a quad.
+* Quad/I - Quads per I piece, of all the I pieces placed, how many were used to get a quad.
+* Spin/T - Spins per T piece, of all the T pieces placed, how many were used to get a T-Spin.
+
 ### Adding new pieces
 
 Each shape is a table:
@@ -33,7 +45,7 @@ counts as topping out.
 By default, the game only has one level; level_speed_table in options.lua lets
 you add more. it's a table of tables that contain two values each:
 
-    {1, 0}, rows per second and lock delay in seconds
+    {1, 0}, how long until block drops one row, and how long until piece locks, both in seconds. (0.016 is about 1 frame)
     
 For example, if you want five levels:
 
