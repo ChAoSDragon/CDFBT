@@ -64,14 +64,10 @@ function Piece:rotate(direction)
 
     if direction == "right" then
         self.rotation = self.rotation + 1
-        --kick_row = self.rotation - 1
 
         if self.rotation > 4 then
             self.rotation = 1
         end
-        --if kick_row < 1 then
-        --    kick_row = 4
-        --end
         invert = 1
     else
         self.rotation = self.rotation - 1
@@ -95,13 +91,6 @@ function Piece:rotate(direction)
                 self.y + coords[i][2] + (self.kick_table[kick_row][kick_attempt][2] * invert)}
             )
         end
-        --[[
-        local new_pos = {
-            {self.x + coords[1][1] + (self.kick_table[kick_row][kick_attempt][1] * invert), self.y + coords[1][2] + (self.kick_table[kick_row][kick_attempt][2] * invert)},
-            {self.x + coords[2][1] + (self.kick_table[kick_row][kick_attempt][1] * invert), self.y + coords[2][2] + (self.kick_table[kick_row][kick_attempt][2] * invert)},
-            {self.x + coords[3][1] + (self.kick_table[kick_row][kick_attempt][1] * invert), self.y + coords[3][2] + (self.kick_table[kick_row][kick_attempt][2] * invert)},
-            {self.x + coords[4][1] + (self.kick_table[kick_row][kick_attempt][1] * invert), self.y + coords[4][2] + (self.kick_table[kick_row][kick_attempt][2] * invert)}
-        }]]
 
         if self:grid_empty(new_pos) then
             local move_x = self.kick_table[kick_row][kick_attempt][1] * invert
