@@ -124,12 +124,10 @@ function love.load()
     }
 
     -- load pieces
-    total_pieces = 0
     local piece_files = love.filesystem.getDirectoryItems("pieces")
     for i,v in ipairs(piece_files) do
         local a, b = string.find(v, ".lua")
         require("pieces."..string.sub(v, 1, a - 1))
-        total_pieces = total_pieces + 1
     end
 
     if options["use_skin"] then
@@ -507,7 +505,7 @@ function love.draw()
     local drawn = 0
     while drawn < math.min(math.max(options["next_pieces"], 0), 6) do
         if next_pos >= #bags[1] + 1 then
-            next_pos = next_pos - total_pieces
+            next_pos = next_pos - #bags[1]
             bag_sel = 2
             love.graphics.line(400, 51 * (drawn + 1), 496, 51 * (drawn + 1))
         end
