@@ -76,7 +76,6 @@ function reset_game()
     das.arr_charge = 0
     bags = {}
     bags.position = 1
-    bags.size = 7
     bags[1] = generate_bag()
     bags[2] = generate_bag()
     hold_piece = nil
@@ -125,10 +124,12 @@ function love.load()
     }
 
     -- load pieces
+    total_pieces = 0
     local piece_files = love.filesystem.getDirectoryItems("pieces")
     for i,v in ipairs(piece_files) do
         local a, b = string.find(v, ".lua")
         require("pieces."..string.sub(v, 1, a - 1))
+        total_pieces = total_pieces + 1
     end
 
     if options["use_skin"] then
@@ -178,7 +179,6 @@ function love.load()
     das.arr_rate = options["arr"]
     bags = {}
     bags.position = 1
-    bags.size = 7
     bags[1] = generate_bag()
     bags[2] = generate_bag()
     hold_piece = nil
@@ -329,7 +329,7 @@ function new_piece(sp)
         bags.position = bags.position + 1
     end
 
-    if bags.position > bags.size then
+    if bags.position > #bags[1] then
         bags.position = 1
         table.remove(bags, 1)
         bags[2] = generate_bag()
@@ -506,8 +506,8 @@ function love.draw()
     local bag_sel = 1
     local drawn = 0
     while drawn < math.min(math.max(options["next_pieces"], 0), 6) do
-        if next_pos >= 8 then
-            next_pos = next_pos - 7
+        if next_pos >= #bags[1] + 1 then
+            next_pos = next_pos - total_pieces
             bag_sel = 2
             love.graphics.line(400, 51 * (drawn + 1), 496, 51 * (drawn + 1))
         end
