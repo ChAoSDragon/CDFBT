@@ -189,7 +189,8 @@ function love.load()
         t_pieces = 0,
         t_spins = 0,
         total_pieces = 0,
-        total_time = 0
+        total_time = 0,
+        combo = 0
     }
 
     firework = love.graphics.newParticleSystem(love.graphics.newImage("firework.png"), 600)
@@ -388,6 +389,7 @@ function draw_stat_panel()
     stat_panel_print("lines: "..lines_cleared)
     stat_panel_print("quads: "..quads_cleared)
     stat_panel_print(previous_clear)
+    stat_panel_print("combo: "..efficiency["combo"])
     -- QRT, BRN
     local qrt
     local brn
