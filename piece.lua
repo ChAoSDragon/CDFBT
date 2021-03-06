@@ -189,6 +189,13 @@ function Piece:lock()
     previous_clear = spin_type..previous_clear
     local was_spin, b = string.find(previous_clear, "spin")
 
+    -- update combo
+    if previous_clear ~= "" then
+        efficiency["combo"] = efficiency["combo"] + 1
+    else
+        efficiency["combo"] = 0
+    end
+
     -- update efficiency
     if self.shape == "I" then
         efficiency["i_pieces"] = efficiency["i_pieces"] + 1
