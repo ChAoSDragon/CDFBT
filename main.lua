@@ -1,7 +1,6 @@
 --[[ TODO
 dynamically fill shapes table with minimal editing
  -> ideally, adding a piece should only require making the file in the pieces dir
-finesse?
 all spins -- what constitues non-t-spins?
 refactoring
 ]]
@@ -86,7 +85,10 @@ function reset_game()
         t_pieces = 0,
         t_spins = 0,
         total_pieces = 0,
-        total_time = 0
+        total_time = 0,
+        combo = 0,
+        inputs = 0,
+        finesse = 0
     }
 
     new_piece()
@@ -188,7 +190,9 @@ function love.load()
         t_spins = 0,
         total_pieces = 0,
         total_time = 0,
-        combo = 0
+        combo = 0,
+        inputs = 0,
+        finesse = 0
     }
 
     firework = love.graphics.newParticleSystem(love.graphics.newImage("firework.png"), 600)
@@ -387,7 +391,10 @@ function draw_stat_panel()
     stat_panel_print("lines: "..lines_cleared)
     stat_panel_print("quads: "..quads_cleared)
     stat_panel_print(previous_clear)
+    -- combo
     stat_panel_print("combo: "..efficiency["combo"])
+    -- finesse
+    stat_panel_print("finesse: "..efficiency["finesse"])
     -- QRT, BRN
     local qrt
     local brn
@@ -651,6 +658,8 @@ function love.update(dt)
     end
 
     if lock_delay_current >= lock_delay_limit then
+        -- count lock delay lock as an input for finesse
+        efficiency["inputs"] = efficiency["inputs"] + 1
         current_piece:lock()
     end
 
@@ -702,12 +711,16 @@ end
 function love.keypressed(key)
     current_piece:keypressed(key)
 
+    efficiency["inputs"] = efficiency["inputs"] + 1
+
     if key == options["keys"]["quit_game"] then
         love.event.quit(0)
     elseif key == options["keys"]["restart_game"] then
         reset_game()
     elseif key == options["keys"]["pause_gravity"] and options["pause_gravity_enabled"] then
         pause_gravity = not pause_gravity
+        -- don't count this for finesse
+        efficiency["inputs"] = efficiency["inputs"] - 1
     end
 end
 
