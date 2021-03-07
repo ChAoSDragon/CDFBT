@@ -196,7 +196,26 @@ function Piece:lock()
         efficiency["combo"] = 0
     end
 
-    -- update efficiency
+    -- update finesse
+    if self.finesse then
+        local x_offset = 99
+
+        for i,v in ipairs(self.rotation_coords[self.rotation]) do
+            if v[1] < x_offset then
+                x_offset = v[1]
+            end
+        end
+
+        x_offset = self.x + (x_offset - 1)
+
+        if efficiency["inputs"] > self.finesse[self.rotation][x_offset] then
+            efficiency["finesse"] = efficiency["finesse"] + (efficiency["inputs"] - self.finesse[self.rotation][x_offset])
+        end
+    end
+
+    efficiency["inputs"] = 0
+
+    -- update I and T piece efficiency
     if self.shape == "I" then
         efficiency["i_pieces"] = efficiency["i_pieces"] + 1
     elseif self.shape == "T" then
