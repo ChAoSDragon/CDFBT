@@ -196,8 +196,8 @@ function Piece:lock()
         efficiency["combo"] = 0
     end
 
-    -- update finesse
-    if self.finesse then
+    -- update finesse, but only if playfield is standard width
+    if self.finesse and options["playfield_size"][1] == 10 then
         local x_offset = 99
 
         for i,v in ipairs(self.rotation_coords[self.rotation]) do
@@ -280,6 +280,12 @@ function Piece:hold()
         end
 
         can_hold = false
+        -- hold resets finesse
+        if love.keyboard.isDown(options["keys"]["move_left"]) or love.keyboard.isDown(options["keys"]["move_right"]) then
+            efficiency["inputs"] = 1
+        else
+            efficiency["inputs"] = 0
+        end
     end
 end
 
